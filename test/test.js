@@ -8,13 +8,9 @@ describe('Rewards', function() {
     const f = new Farm(TOTAL_REWARDS, REWARDS_BLOCK)
     f.start()
 
-    f.level = 0
-    f.stake("user1", 1000)
-    f.level = 50
-    f.stake("user2", 1000)
-    f.level = 100
-    f.claim("user1")
-    f.claim("user2")
+    f.level =   0; f.stake("user1", 1000)
+    f.level =  50; f.stake("user2", 1000)
+    f.level = 100; f.claim("user1"); f.claim("user2")
 
     assert(f.stakers.user1.paid == 750)
     assert(f.stakers.user2.paid == 250)
