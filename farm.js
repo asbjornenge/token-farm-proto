@@ -18,14 +18,14 @@ export class Farm {
 
   stake(address, amount) {
     if (!this.stakers[address]) this.stakers[address] = {
-      balance: 0,
+      balanceTotal: 0,
       balanceLevel: {0:0},
       rewards: 0,
       paid: 0,
       lastLevelPaid: this.level,
     }
-    this.stakers[address].balance += amount
-    this.stakers[address].balanceLevel[this.level] = this.stakers[address].balance
+    this.stakers[address].balanceTotal += amount
+    this.stakers[address].balanceLevel[this.level] = this.stakers[address].balanceTotal
     this.details.totalStaked += amount
     this.details.totalStakedLevel[this.level] = this.details.totalStaked
   }
