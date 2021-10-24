@@ -1,6 +1,6 @@
 export class Farm {
   constructor(rewards, rewardPerBlock) {
-    this.balances = {}
+    this.stakers = {}
     this.details = {
       rewards: rewards,
       rewardPerBlock: rewardPerBlock,
@@ -17,15 +17,15 @@ export class Farm {
   }
 
   stake(address, amount) {
-    if (!this.balances[address]) this.balances[address] = {
+    if (!this.stakers[address]) this.stakers[address] = {
       balance: 0,
       balanceLevel: {0:0},
       rewards: 0,
       paid: 0,
       lastLevelPaid: this.level,
     }
-    this.balances[address].balance += amount
-    this.balances[address].balanceLevel[this.level] = this.balances[address].balance
+    this.stakers[address].balance += amount
+    this.stakers[address].balanceLevel[this.level] = this.stakers[address].balance
     this.details.totalStaked += amount
     this.details.totalStakedLevel[this.level] = this.details.totalStaked
   }
@@ -40,9 +40,8 @@ export class Farm {
   }
 
   claim(address, debug=false) {
-    let user = this.balances[address]
+    let user = this.stakers[address]
 
-    // Make sure we don't pay for level user.lastLevelPaid twice!
     let claimLevel = this.level
     if (claimLevel > this.details.endLevel) claimLevel = this.details.endLevel
     let rewards = 0
@@ -50,7 +49,6 @@ export class Farm {
       let tsl = this.findAtLevel(level, this.details.totalStakedLevel)
       let rwt = this.details.rewardPerBlock / tsl
       let bal = this.findAtLevel(level, user.balanceLevel)
-      //let rwt = Math.floor((this.details.rewardPerBlock / tsl) * 100) / 100
       let rewardToUser = bal * rwt 
       //console.log(address,level,tsl,rwt,bal,rewardToUser)
       rewards += rewardToUser
@@ -73,4 +71,4 @@ export class Farm {
 //f.level = 100
 //f.claim("user1")
 //f.claim("user2")
-//console.log(f.balances)
+//console.log(f.stakers)

@@ -16,9 +16,9 @@ describe('Rewards', function() {
     f.claim("user1")
     f.claim("user2")
 
-    assert(f.balances.user1.paid == 750)
-    assert(f.balances.user2.paid == 250)
-    const totalPaid = Object.values(f.balances).reduce((tp, u) => tp+=u.paid,0)
+    assert(f.stakers.user1.paid == 750)
+    assert(f.stakers.user2.paid == 250)
+    const totalPaid = Object.values(f.stakers).reduce((tp, u) => tp+=u.paid,0)
     assert(totalPaid == TOTAL_REWARDS)
   })
   it('Users can stake and claim whenever they want', function() {
@@ -36,9 +36,9 @@ describe('Rewards', function() {
     f.claim("user1")
     f.claim("user2")
 
-    assert(f.balances.user1.paid == 8750)
-    assert(f.balances.user2.paid == 1250)
-    const totalPaid = Object.values(f.balances).reduce((tp, u) => tp+=u.paid,0)
+    assert(f.stakers.user1.paid == 8750)
+    assert(f.stakers.user2.paid == 1250)
+    const totalPaid = Object.values(f.stakers).reduce((tp, u) => tp+=u.paid,0)
     assert(totalPaid == TOTAL_REWARDS)
   })
 })
