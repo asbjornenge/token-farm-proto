@@ -17,6 +17,7 @@ describe('Rewards', function() {
     const totalPaid = Object.values(f.stakers).reduce((tp, u) => tp+=u.paid,0)
     assert(totalPaid == TOTAL_REWARDS)
   })
+
   it('Users can stake and claim whenever they want', function() {
     const TOTAL_REWARDS = 10000
     const REWARDS_BLOCK = 100
