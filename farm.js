@@ -24,10 +24,20 @@ export class Farm {
       paid: 0,
       lastLevelPaid: this.level,
     }
-    this.stakers[address].balanceTotal += amount
-    this.stakers[address].balanceLevel[this.level] = this.stakers[address].balanceTotal
+    let user = this.stakers[address]
+    user.balanceTotal += amount
+    user.balanceLevel[this.level] = user.balanceTotal
     this.details.totalStaked += amount
     this.details.totalStakedLevel[this.level] = this.details.totalStaked
+  }
+
+  unstake(address, amount) {
+    let user = this.stakers[address]
+    user.balanceTotal -= amount
+    user.balanceLevel[this.level] = user.balanceTotal
+    this.details.totalStaked -= amount
+    this.details.totalStakedLevel[this.level] = this.details.totalStaked
+    this.claim(address)
   }
 
   findAtLevel(level, _map) {
