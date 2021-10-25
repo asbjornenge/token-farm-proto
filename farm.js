@@ -6,14 +6,18 @@ export class Farm {
       rewardPerBlock: rewardPerBlock,
       endLevel: 0,
       totalStaked: 0,
-      totalStakedLevel: {0:0},
-      rewardsDistributed: 0
+      totalStakedLevel: {0:0}
     }
     this.level = 0
   }
 
   start() {
-    this.details.endLevel = this.details.rewards / this.details.rewardPerBlock
+    this.details.endLevel = this.level + (this.details.rewards / this.details.rewardPerBlock)
+  }
+
+  refill(amount) {
+    this.details.rewards += amount 
+    this.details.endLevel = this.details.endLevel + (amount / this.details.rewardPerBlock)
   }
 
   stake(address, amount) {
@@ -61,6 +65,7 @@ export class Farm {
       let bal = this.findAtLevel(level, user.balanceLevel)
       let rewardToUser = bal * rwt 
       //console.log(address,level,tsl,rwt,bal,rewardToUser)
+      if (this.details.rewards < rewardToUser) throw new Error('Not enough rewards for user') 
       rewards += rewardToUser
       this.details.rewards -= rewardToUser
     }

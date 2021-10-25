@@ -6,7 +6,8 @@
   "description": "",
   "main": "farm.js",
   "scripts": {
-    "test": "mocha --reporter nyan"
+    "test": "mocha --reporter nyan",
+    "watch": "mocha --reporter nyan --watch --parallel"
   },
   "author": "",
   "license": "ISC",
