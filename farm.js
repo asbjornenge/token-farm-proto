@@ -90,15 +90,3 @@ export class Farm {
   }
 }
 
-//const TOTAL_REWARDS = 10000
-//const REWARDS_BLOCK = 100
-//const f = new Farm(TOTAL_REWARDS, REWARDS_BLOCK)
-//f.start()
-//
-//f.level =  0; f.stake("user1", 1000)
-//f.level = 10; f.stake("user1", 3000)
-//f.level = 50; f.stake("user2", 1000)
-//f.level = 100
-//f.claim("user1")
-//f.claim("user2")
-//console.log(f.stakers)
